@@ -11,7 +11,7 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
         python-version: ["3.8", "3.9", "3.10", "3.11"]
-        architecture: [x86, arm64, armv7l]
+        architecture: [x86, arm64, armv7l, x86_64]
 
     runs-on: ${{ matrix.os }}
 
@@ -36,5 +36,5 @@ jobs:
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: wheel-${{ matrix.architecture }}
+          name: wheel
           path: dist/*.whl
