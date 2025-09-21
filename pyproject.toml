@@ -9,10 +9,10 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "qdes"
 version = "0.1.0"
-description = "QQMusic Lyric encrypt/decrypt python module"
+description = "QQMusic Lyric decrypt/encrypt python module"
 readme = "README.md"
-requires-python = ">=3.6"
-license = {text = "MIT"}
+requires-python = ">=3.7"
+license = "MIT"
 authors = [
     {name = "helloplhm-qwq", email = "helloplhm-qwq@outlook.com"}
 ]
@@ -24,16 +24,12 @@ classifiers = [
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
     "Programming Language :: C++",
-    "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
 ]
 
 [project.urls]
 "Homepage" = "https://github.com/helloplhm-qwq/pyqdes"
-"Bug Tracker" = "https://github.com/helloplhm-qwq/qdes/issues"
+"Bug Tracker" = "https://github.com/helloplhm-qwq/pyqdes/issues"
 
 [tool.setuptools]
-packages = ["qdes"]
-
-[tool.setuptools.package-data]
-qdes = ["*.pyi", "py.typed"]
+py-modules = ["qdes"]
