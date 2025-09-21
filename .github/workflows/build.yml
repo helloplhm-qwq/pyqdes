@@ -4,37 +4,42 @@ on:
   push:
     branches:
       - master
+  pull_request:
+    branches:
+      - master
 
 jobs:
   build:
     strategy:
+      fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
-        python-version: ["3.8", "3.9", "3.10", "3.11"]
-        architecture: [x86, arm64, armv7l, x86_64]
+        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
 
     runs-on: ${{ matrix.os }}
 
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
       - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
-
-      - name: Checkout code
-        uses: actions/checkout@v2
+          cache: 'pip'
 
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install wheel pybind11
+          pip install wheel setuptools build pybind11
 
       - name: Build wheel
         run: |
-          python setup.py bdist_wheel
+          python -m build --wheel
 
       - name: Upload artifacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
-          name: wheel
+          name: wheels-${{ matrix.os }}-py${{ matrix.python-version }}
           path: dist/*.whl
+          retention-days: 7
