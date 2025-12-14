@@ -122,7 +122,7 @@ py::bytes DesDecrypt(py::bytes input, py::bytes key)
 PYBIND11_MODULE(qdes, m) {
     m.def("LyricDecode", &LyricDecode, "Decrypt a string using the triple DES key sequence");
     m.def("LyricEncode", &LyricEncode, "Encrypt a string using the triple DES key sequence");
-    m.def("DesDecrypt", &DesEncrypt, "DES encrypt with custom key", 
+    m.def("DesEncrypt", &DesEncrypt, "DES encrypt with custom key", 
           py::arg("input"), py::arg("key"));
     m.def("DesDecrypt", &DesDecrypt, "DES decrypt with custom key", 
           py::arg("input"), py::arg("key"));
